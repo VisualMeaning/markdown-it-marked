@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "postpublish": "git push --atomic origin master $npm_package_version",
+    "postpublish": "git push --atomic origin master v$npm_package_version",
     "postversion": "npm publish",
     "prepare": "rollup --config",
     "pretest": "eslint .",
