@@ -30,6 +30,7 @@ function buildEnv(strings, pre, suf, flags) {
 }
 
 const boundaries = ['', '\\b', '(?:', '\\b(?:', ')', ')\\b'];
+// Cc: Control Cf: forma P: Punctuation Z: Separator
 const endClasses = '|\\p{Cc}\\p{Cf}|\\p{P}|\\p{Z})';
 const unicodeParts = ['', '(?<=^' + endClasses, '(?:', ')', '(?=$' + endClasses];
 
