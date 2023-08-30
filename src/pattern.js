@@ -43,7 +43,7 @@ export function envFromTerms(terms, options) {
   // If terms may be suffixes, do not include boundary prefix.
   const boundaryPre = !options.suffix;
   const boundarySuf = !options.prefix;
-  const contain = boundaryPre | boundarySuf && terms.length > 1;
+  const contain = (boundaryPre | boundarySuf) & terms.length > 1;
   const pre = boundaries[contain * 2 | boundaryPre];
   const suf = boundaries[contain * 4 | boundarySuf];
 
