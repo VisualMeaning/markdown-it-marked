@@ -64,7 +64,7 @@ export function envFromUnicodeTerms(terms, options) {
   // If terms may be suffixes, do not include boundary prefix.
   const boundaryPre = !options.suffix;
   const boundarySuf = !options.prefix;
-  const contain = boundaryPre | boundarySuf && terms.length > 1;
+  const contain = (boundaryPre | boundarySuf) & terms.length > 1;
   const pre = unicodeParts[+boundaryPre] + unicodeParts[contain * 2];
   const suf = unicodeParts[contain * 3] + unicodeParts[boundarySuf * 4];
 
