@@ -7,7 +7,7 @@
 
 import MarkdownIt from 'markdown-it';
 
-import {envFromUnicodeTerms, plugin} from 'markdown-it-marked';
+import {envFromTerms, envFromUnicodeTerms, plugin} from 'markdown-it-marked';
 
 describe('default options', () => {
   const mi = MarkdownIt()
@@ -71,15 +71,31 @@ describe('default options', () => {
   });
 });
 
-describe('integration', () => {
+describe('envFromTerms integration', () => {
   const mi = MarkdownIt()
     .use(plugin);
 
-  const ampEnv = envFromUnicodeTerms(['a', '&', 'b']);
+  const ampEnv = envFromTerms(['a', '&', 'b', '(c)'], {prefix: true});
+  test.each([
+    ['', ''],
+    ['a & b', '<mark>a</mark> &amp; <mark>b</mark>'],
+    ['aa && bb', '<mark>a</mark>a &amp;&amp; <mark>b</mark>b'],
+    ['a & b (c)', '<mark>a</mark> &amp; <mark>b</mark> (c)'],
+  ])('real world %O in %O', (input, expected) => {
+    expect(mi.renderInline(input, ampEnv)).toEqual(expected);
+  });
+});
+
+describe('envFromUnicodeTerms integration', () => {
+  const mi = MarkdownIt()
+    .use(plugin);
+
+  const ampEnv = envFromUnicodeTerms(['a', '&', 'b', '(c)'], {prefix: true});
   test.each([
     ['', ''],
     ['a & b', '<mark>a</mark> <mark>&amp;</mark> <mark>b</mark>'],
-    ['aa && bb', 'aa <mark>&amp;</mark><mark>&amp;</mark> bb'],
+    ['aa && bb', '<mark>a</mark>a <mark>&amp;</mark><mark>&amp;</mark> <mark>b</mark>b'],
+    ['a & b (c)', '<mark>a</mark> <mark>&amp;</mark> <mark>b</mark> <mark>(c)</mark>'],
   ])('real world %O in %O', (input, expected) => {
     expect(mi.renderInline(input, ampEnv)).toEqual(expected);
   });
