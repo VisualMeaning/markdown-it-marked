@@ -7,9 +7,9 @@
 
 import {promises as fs} from 'fs';
 import babel from '@rollup/plugin-babel';
-import {terser} from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 
-import {main, module} from './package.json';
+const {main, module} = JSON.parse(await fs.readFile('./package.json'))
 
 async function loadBanner() {
   const contents = await fs.readFile(module, {encoding: 'utf-8'});
