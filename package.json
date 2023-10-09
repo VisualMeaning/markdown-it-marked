@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-marked",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Plugin for markdown-it for marking substrings within text",
   "license": "Apache-2.0",
   "main": "dist/markdown-it-marked.js",
@@ -29,6 +29,7 @@
     "mark"
   ],
   "scripts": {
+    "coverage": "jest --coverage",
     "lint": "eslint .",
     "postpublish": "git push --atomic origin master v$npm_package_version",
     "postversion": "npm publish",

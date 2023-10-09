@@ -5,6 +5,6 @@
  * This is free software licensed as Apache-2.0 - see COPYING for terms.
  */
 
-export {envFromTerms} from './pattern.js';
+export {envFromTerms, envFromUnicodeTerms} from './pattern.js';
 
 export {markedPlugin as plugin} from './plugin.js';
