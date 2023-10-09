@@ -68,6 +68,6 @@ module.exports = {
       'sort-keys': 'warn',
     },
   }],
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   rules,
 };
