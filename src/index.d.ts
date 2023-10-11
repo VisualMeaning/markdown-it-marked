@@ -10,4 +10,6 @@ export type TermOptions = {exact?: boolean, prefix?: boolean, suffix?: boolean};
 
 export function envFromTerms(terms: string[], options?: TermOptions): MarkedEnv;
 
+export function envFromUnicodeTerms(terms: string[], options?: TermOptions): MarkedEnv;
+
 export function plugin(md: unknown): void;
