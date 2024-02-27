@@ -8,20 +8,13 @@ export function plainTextPlugin(md) {
 
   const scan = function (tokens) {
     let text = '';
+    const tokenTypes = ['text', 'fence', 'html_block', 'code_block', 'code_inline', 'html_inline', 'emoji'];
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
       if (token.children !== null) {
         text += scan(token.children);
       } else {
-        if (
-          token.type === 'text'
-          || token.type === 'fence'
-          || token.type === 'html_block'
-          || token.type === 'code_block'
-          || token.type === 'code_inline'
-          || token.type === 'html_inline'
-          || token.type === 'emoji'
-        ) {
+        if (tokenTypes.includes(token.type)) {
           text += token.content;
         } else if (/[a-zA-Z]+_close/.test(token.type)) { // prevent words from sticking together
           text += " ";
