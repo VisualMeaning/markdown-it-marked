@@ -79,7 +79,11 @@ describe('plain text', () => {
     ['', ''],
     ['x', 'x '],
     ['x\n\ny', 'x y '],
-  ])('no markdown with %0', (input, expected) => {
+    ['x and y(s)', 'x and y(s) '],
+    ['Fake data [Fake orange](#VM/test-fake-data)', 'Fake data Fake orange '],
+    ['__Fake data by [Anthony S](#VM/_person_xxx) on 02 Feb 1995__', 'Fake data by Anthony S on 02 Feb 1995 '],
+    ['[Fake orange](#VM/test-fake-data) for fake data', 'Fake orange for fake data '],
+  ])('plain text for %0', (input, expected) => {
     mi.render(input);
     expect(mi.plainText).toEqual(expected);
   });
