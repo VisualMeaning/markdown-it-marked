@@ -8,3 +8,5 @@
 export {envFromTerms, envFromUnicodeTerms} from './pattern.js';
 
 export {markedPlugin as plugin} from './plugin.js';
+
+export {plainTextPlugin} from './plainTextPlugin.js';

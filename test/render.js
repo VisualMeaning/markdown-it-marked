@@ -7,7 +7,7 @@
 
 import MarkdownIt from 'markdown-it';
 
-import {envFromTerms, envFromUnicodeTerms, plugin} from 'markdown-it-marked';
+import {envFromTerms, envFromUnicodeTerms, plugin, plainTextPlugin} from 'markdown-it-marked';
 
 describe('default options', () => {
   const mi = MarkdownIt()
@@ -69,6 +69,21 @@ describe('default options', () => {
   ])('block match %O in %O', (pat, input, expected) => {
     expect(mi.render(input, {markedPattern: pat})).toEqual(expected);
   });
+});
+
+describe('plain text', () => {
+  const mi = MarkdownIt()
+    .use(plainTextPlugin);
+
+  test.each([
+    ['', ''],
+    ['x', 'x '],
+    ['x\n\ny', 'x y '],
+  ])('no markdown with %0', (input, expected) => {
+    mi.render(input);
+    expect(mi.plainText).toEqual(expected);
+  });
+
 });
 
 describe('envFromTerms integration', () => {

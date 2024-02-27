@@ -6,7 +6,7 @@
 
 export function plainTextPlugin(md) {
 
-  const scan = (tokens) => {
+  const scan = function (tokens) {
     let text = '';
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
@@ -14,25 +14,25 @@ export function plainTextPlugin(md) {
         text += scan(token.children);
       } else {
         if (
-          token.type === 'text' ||
-          token.type === 'fence' ||
-          token.type === 'html_block' ||
-          token.type === 'code_block' ||
-          token.type === 'code_inline' ||
-          token.type === 'html_inline' ||
-          token.type === 'emoji'
+          token.type === 'text'
+          || token.type === 'fence'
+          || token.type === 'html_block'
+          || token.type === 'code_block'
+          || token.type === 'code_inline'
+          || token.type === 'html_inline'
+          || token.type === 'emoji'
         ) {
           text += token.content;
         } else if (/[a-zA-Z]+_close/.test(token.type)) { // prevent words from sticking together
-          text += " "
+          text += " ";
         }
       }
     }
 
     return text;
-  }
+  };
 
-  const rule = function plainTextRule(state) {
+  const plainTextRule = function (state) {
     const text = scan(state.tokens);
     // remove redundant white spaces
     md.plainText = text.replace(/\s+/g, " ");
